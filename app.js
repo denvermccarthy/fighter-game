@@ -23,8 +23,22 @@ let goblins = [
         img: undefined
     }
 ];
-goblinId = 3;
-// set event listeners 
+let goblinId = 3;
+// set event listeners
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+
+    const goblin = {
+        id: goblinId++,
+        name: formData.get('gob-name'),
+        hp: Math.ceil(Math.random() * 4),
+        img: undefined
+    };
+
+    console.log(goblin);
+});
   // get user input
   // use user input to update state 
   // update DOM to reflect the new state
