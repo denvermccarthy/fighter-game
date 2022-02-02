@@ -43,6 +43,8 @@ main {
 
 #gob-container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     align-self: flex-end;
     justify-content: center;
     border: 5px solid black;
@@ -89,6 +91,9 @@ header {
     box-shadow: var(--shadow);
 }
 
+.goblin {
+    background-color: white;
+}
 
 #reset {
   height: var(--header-height);
