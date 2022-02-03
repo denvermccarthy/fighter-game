@@ -18,7 +18,7 @@ let goblins = [
     {
         id: 1,
         name: 'bart',
-        hp: 1,
+        hp: 2,
         img: undefined
     }, {
         id: 2,
@@ -30,11 +30,12 @@ let goblins = [
 let goblinId = 3;
 // set event listeners
 function displayGoblins() {
+    gobArea.innerHTML = '';
     for (const goblin of goblins) {
         const gob = renderGoblin(goblin);
         gob.addEventListener('click', () => {
             console.log('clicked', goblin);
-            // playGame();
+            playGame(goblin);
         });
         gobArea.append(gob);
     }
@@ -57,6 +58,33 @@ form.addEventListener('submit', (e) => {
     displayGoblins();
   
 });
+
+function hitUser() {
+    // console.log('user was hit');
+    userHp--;
+    hpEl.textContent = userHp;
+}
+
+function hitGoblin(goblin) {
+//  console.log('goblin was hit')
+    goblin.hp--;
+    displayGoblins();
+    if (goblin.hp === 0) {
+        defeatCount++;
+        defeatEl.textContent = defeatCount; 
+    }
+}
+
+function playGame(goblin) {
+    
+    Math.random() < .75 ? hitGoblin(goblin) : console.log('user miss');
+
+    Math.random() < .50 ? hitUser() : console.log('goblin miss');
+
+    
+
+}
   // get user input
   // use user input to update state 
   // update DOM to reflect the new state
+  // goblin.hp.every(equalsZero) ? console.log('win') : console.log('loss');
