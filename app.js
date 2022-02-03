@@ -1,6 +1,8 @@
 // import functions and grab DOM elements
 // import {} from './utils.js';
 
+import { renderGoblin } from './utils.js';
+
 const hpEl = document.getElementById('user-hp');
 const defeatEl = document.getElementById('defeat-count');
 const form = document.getElementById('gob-form');
@@ -27,7 +29,17 @@ let goblins = [
 ];
 let goblinId = 3;
 // set event listeners
-
+function displayGoblins() {
+    for (const goblin of goblins) {
+        const gob = renderGoblin(goblin);
+        gob.addEventListener('click', () => {
+            console.log('clicked', goblin);
+            // playGame();
+        });
+        gobArea.append(gob);
+    }
+}
+displayGoblins();
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(form);
@@ -42,6 +54,7 @@ form.addEventListener('submit', (e) => {
     goblins.push(goblin);
     // console.log('gob', goblin, 'gobs', goblins);
     form.reset();
+    displayGoblins();
   
 });
   // get user input
