@@ -1,4 +1,6 @@
 // import functions and grab DOM elements
+// import {} from './utils.js';
+
 const hpEl = document.getElementById('user-hp');
 const defeatEl = document.getElementById('defeat-count');
 const form = document.getElementById('gob-form');
@@ -36,8 +38,11 @@ form.addEventListener('submit', (e) => {
         hp: Math.ceil(Math.random() * 4),
         img: undefined
     };
-
-    console.log(goblin);
+    
+    goblins.push(goblin);
+    // console.log('gob', goblin, 'gobs', goblins);
+    form.reset();
+  
 });
   // get user input
   // use user input to update state 
