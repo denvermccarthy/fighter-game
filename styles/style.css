@@ -92,7 +92,13 @@ header {
 }
 
 .goblin {
+    display: flex;
+    align-items: center;
     background-color: white;
+    width: 200px;
+}
+.goblin img{
+    width: 50%;   
 }
 
 #reset {
@@ -137,3 +143,8 @@ footer {
     background-color: var(--color3);
     box-shadow: var(--shadow);
 }
+
+.rotate {
+    transform: rotate(90deg);
+}
+

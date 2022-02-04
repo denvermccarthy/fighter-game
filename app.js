@@ -8,6 +8,8 @@ const defeatEl = document.getElementById('defeat-count');
 const form = document.getElementById('gob-form');
 const gobArea = document.getElementById('gob-area');
 const reset = document.getElementById('reset');
+const userImg = document.getElementById('user-img');
+// const display = document.getElementById('display-hit');
 
 // console.log('hp', hpEl, 'defeat', defeatEl, 'form', form, 'gobarea', gobArea, 'button', reset);
 
@@ -42,6 +44,23 @@ function displayGoblins() {
 
 }
 displayGoblins();
+
+// function displayHit(string) {
+//     display.innerHTML = '';
+//     if (string === 'user') {
+//         const h3 = document.createElement('h3');
+//         h3.textContent = 'USER WAS HIT';
+//         display.append(h3);
+//     } else if (string === 'goblin') {
+//         const h3 = document.createElement('h3');
+//         h3.textContent = 'GOBLIN WAS HIT';
+//         display.append(h3);
+//     } else {
+//         const h3 = document.createElement('h3');
+//         h3.textContent = 'BOTH MISSED!';
+//         display.append(h3); 
+//     }
+// }
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(form);
@@ -49,7 +68,7 @@ form.addEventListener('submit', (e) => {
     const goblin = {
         id: goblinId++,
         name: formData.get('gob-name'),
-        hp: Math.ceil(Math.random() * 4),
+        hp: 3,
         img: './assets/icons8-goblin-64.png'
     };
     
@@ -61,12 +80,13 @@ form.addEventListener('submit', (e) => {
 });
 
 function hitUser(g) {
-    console.log('user was hit');
+    // console.log('user was hit');
     userHp--;
     if (g.hp === 0){
         userHp++;
     }
     hpEl.textContent = userHp;
+    // alert('user was hit!');
 }
 
 function hitGoblin(goblin) {
@@ -80,25 +100,45 @@ function hitGoblin(goblin) {
     } else if (goblin.hp < 0) {
         goblin.hp = 0;
     } 
+   // alert(`${goblin.name} was hit!`);
     displayGoblins();
 }
 
 function playGame(goblin) {
+    if (goblin.hp === 0) return;
     
+    const goblinWasHit = Math.random() < .50;
+    const userWasHit = Math.random() < .50;
 
-    Math.random() < .75 ? hitGoblin(goblin) : console.log('user miss');
+    // if (goblinWasHit && userWasHit) displayHit('both');
 
-    Math.random() < .50 ? hitUser(goblin) : console.log('goblin miss');
+    if (goblinWasHit) {
+        hitGoblin(goblin);
+        alert('goblin was hit!');
+    } else {
+        alert('user missed!');
+    }
 
-    // if (goblin.hp === 0) {
-    //     goblin.img = './assets/dead.png';
-    //     console.log('dead', goblin);
-    //     displayGoblins();
-    // } else if (goblin.hp < 0) {
-    //     // set to zero, find a way to keep at zero
-    //     goblin.hp = 0;
-    //     displayGoblins();
-    // } 
+    if (userWasHit) {
+        hitUser(goblin);
+        alert('user was hit!');
+    } else {
+        alert(`${goblin.name} missed!`);
+    }
+
+    const win = goblins.every((goblin) => goblin.hp === 0);
+    if (win) {
+        //generateModal(true);
+        alert('you win!');
+        window.location.reload();
+    }
+
+    if (userHp === 0) {
+        //lose generateModal(false);
+        userImg.classList.add('rotate');
+        alert('you lose!');
+        window.location.reload();
+    }
 
 }
   // get user input
