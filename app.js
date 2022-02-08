@@ -45,22 +45,6 @@ function displayGoblins() {
 }
 displayGoblins();
 
-// function displayHit(string) {
-//     display.innerHTML = '';
-//     if (string === 'user') {
-//         const h3 = document.createElement('h3');
-//         h3.textContent = 'USER WAS HIT';
-//         display.append(h3);
-//     } else if (string === 'goblin') {
-//         const h3 = document.createElement('h3');
-//         h3.textContent = 'GOBLIN WAS HIT';
-//         display.append(h3);
-//     } else {
-//         const h3 = document.createElement('h3');
-//         h3.textContent = 'BOTH MISSED!';
-//         display.append(h3); 
-//     }
-// }
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(form);
@@ -105,7 +89,7 @@ function hitGoblin(goblin) {
 }
 
 function playGame(goblin) {
-    if (goblin.hp === 0) return;
+    if (goblin.hp === 0 || userHp === 0) return;
     
     const goblinWasHit = Math.random() < .50;
     const userWasHit = Math.random() < .50;
@@ -136,24 +120,11 @@ function playGame(goblin) {
     if (userHp === 0) {
         //lose generateModal(false);
         userImg.classList.add('rotate');
-        alert('you lose!');
-        window.location.reload();
+        alert('you lose!'); 
     }
 
 }
-  // get user input
-  // use user input to update state 
-  // update DOM to reflect the new state
-  // goblin.hp.every(equalsZero) ? console.log('win') : console.log('loss');
 
-   // const isDead = goblins.forEach((goblin) => {
-    //     if (goblin.hp < 0) {
-
-    // });
-
-    // if (isDead) {
-    //     // remove all goblins 
-    // }
 reset.addEventListener('click', () => {
     window.location.reload();
 });  
